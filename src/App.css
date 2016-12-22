@@ -1,4 +1,11 @@
-/*General styles*/
+ul>li {
+  list-style: none;
+  margin-bottom: 10px;
+}
+ul {
+  margin-top: 30px;
+}
 .main-container {
-    background-color: antiquewhite;
+  border-radius: 10px;
+  margin: 0 auto;
 }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../reusableMenuComponent/.idea/tabs.iml" filepath="$PROJECT_DIR$/../reusableMenuComponent/.idea/tabs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/reusableMenuComponent.iml" filepath="$PROJECT_DIR$/.idea/reusableMenuComponent.iml" />
     </modules>
   </component>
 </project>
