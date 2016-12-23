@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-import MyItemsCreator from './components/MyItemsCreator';
+import '../App.css';
+import MyItemsCreator from './MyItemsCreator';
 
 
 class App extends Component {
@@ -10,7 +10,6 @@ class App extends Component {
         <div className="items-container col-sm-6">
           <MyItemsCreator />
         </div>
-
       </div>
     );
   }

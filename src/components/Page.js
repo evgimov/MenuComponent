@@ -2,7 +2,6 @@ import React, {
   Component,
   PropTypes,
 } from 'react';
-import {Link} from 'react-router';
 
 class Page extends Component {
   render() {

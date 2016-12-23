@@ -13,7 +13,7 @@ class MyTextField extends Component {
     let val = e.target.value;
     let validated = '1';
 
-    if (!(isNaN(val) || (parseInt(val) > 5) || (parseInt(val) < 1)))   {
+    if (!(isNaN(val) || (parseInt(val) > 9) || (parseInt(val) < 1)))   {
       validated = val;
     }
 
