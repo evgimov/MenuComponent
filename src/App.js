@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Link from 'react-router';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 
@@ -34,7 +35,7 @@ class MyTextField extends Component {
     let val = e.target.value;
     let validated = '1';
 
-    if (!(isNaN(val) || (parseInt(val) > 9 ) || (parseInt(val) < 1)))   {
+    if (!(isNaN(val) || (parseInt(val) > 5) || (parseInt(val) < 1)))   {
       validated = val;
     }
 
@@ -50,30 +51,55 @@ class MyTextField extends Component {
   }
 };
 
-MyTextField.propTypes = { maxVal: React.PropTypes.number };
-MyTextField.defaultProps = { maxVal: 0 };
-
-
-class MyItem extends Component {
+class MenuItem extends Component {
   render() {
     return (
-      <li>
-        <input type='text' value={this.props.data}/>
-      </li>
+      <li className="submenu"><a href={"/#/" + this.props.data}>{this.props.data}</a></li>
     );
   }
 };
+
+
+class MenuItemsList extends Component {
+  render() {
+    let menuItems =  [];
+
+
+    for(let i = 0; i < this.props.menuItems; i++ ) {
+      menuItems.push(<MenuItem key={'menuitemdata-' + i} data={i + 1} />);
+    }
+    return <ul className="menu"><li className="expand">
+      <a href="#">
+        <span className="glyphicon glyphicon-plus"></span>
+      </a>
+    </li>{menuItems}</ul>;
+  }
+}
+
+
+/*class MenuItemsCreator extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <MenuItemsList items={this.state.items} />
+    )
+  }
+}; */
 
 class ItemsList extends Component {
   render() {
     let items =  [];
 
     for(let i = 0; i < this.props.items; i++ ) {
-      items.push(<MyItem key={'rowdata-' + i} data={i + 1} />);
+      items.push(<MyItem key={'itemdata-' + i} data={i + 1} />);
     }
     return <ul>{items}</ul>;
   }
 };
+
 
 class ItemsCreator extends Component {
   constructor(props) {
@@ -82,15 +108,17 @@ class ItemsCreator extends Component {
     this.state = {
       data: '1',
       items: 1
-    }
+    };
   }
 
   onButtonClicked = () => {
     this.setState({items: parseInt(this.state.data)});
+
   }
 
   onDataChanged = (newValue) => {
     this.setState({data: newValue});
+
   }
 
   render() {
@@ -104,30 +132,50 @@ class ItemsCreator extends Component {
         <div className='item-names'>
           <ItemsList items={this.state.items} />
         </div>
+        <div className="menu-container">
+          <div className="inner">
+            <MenuItemsList menuItems={this.state.items} />
+          </div>
+        </div>
       </div>
-    )
+
+
+    );
   }
 
 };
 
-class MenuItem extends Component {
+class MyItem extends Component {
+  /*constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+    this.state = {
+      data: this.props.data
+    };
+  }
+
+  onDataChanged = (newValue) => {
+    this.setState({data: newValue});
+    alert(this.state.data);
+  }*/
+
   render () {
     return (
       <li>
-        <input type='text' value={this.props.data}/>
+        <input type='text' onChange={this.onDataChanged} defaultValue={this.props.data} />
       </li>
     );
   }
 };
 
-
-
-
 class App extends Component {
   render() {
     return (
-      <div className="main-container col-sm-6 text-center">
-        <ItemsCreator />
+      <div className="main-container text-center">
+        <div className="items-container col-sm-6">
+          <ItemsCreator />
+        </div>
+
       </div>
     );
   }
