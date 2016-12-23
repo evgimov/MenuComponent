@@ -9,14 +9,14 @@ function MyLabel(props) {
 };
 
 class MyButton extends Component{
-  onButtonClicked = (e) => {
+  handleClick = (e) => {
     if (this.props.onClick) {
       this.props.onClick(e);
     }
   }
 
   render() {
-    return <button onClick={this.onButtonClicked}>{this.props.textButton}</button>;
+    return <button onClick={this.handleClick}>{this.props.textButton}</button>;
   }
 }
 
@@ -63,31 +63,21 @@ class MenuItem extends Component {
 class MenuItemsList extends Component {
   render() {
     let menuItems =  [];
-
-
     for(let i = 0; i < this.props.menuItems; i++ ) {
       menuItems.push(<MenuItem key={'menuitemdata-' + i} data={i + 1} />);
     }
-    return <ul className="menu"><li className="expand">
-      <a href="#">
-        <span className="glyphicon glyphicon-plus"></span>
-      </a>
-    </li>{menuItems}</ul>;
+    return (
+      <ul className="menu">
+        <li className="expand">
+          <a href="#">
+            <span className="glyphicon glyphicon-plus"></span>
+          </a>
+        </li>
+        {menuItems}
+        </ul>
+    );
   }
 }
-
-
-/*class MenuItemsCreator extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <MenuItemsList items={this.state.items} />
-    )
-  }
-}; */
 
 class ItemsList extends Component {
   render() {
@@ -100,7 +90,6 @@ class ItemsList extends Component {
   }
 };
 
-
 class ItemsCreator extends Component {
   constructor(props) {
     super(props);
@@ -111,12 +100,12 @@ class ItemsCreator extends Component {
     };
   }
 
-  onButtonClicked = () => {
+  handleClick = () => {
     this.setState({items: parseInt(this.state.data)});
 
   }
 
-  onDataChanged = (newValue) => {
+  handleChange = (newValue) => {
     this.setState({data: newValue});
 
   }
@@ -126,8 +115,8 @@ class ItemsCreator extends Component {
       <div className='items-container'>
         <div className='add-item'>
           <MyLabel textLabel="Enter the number of menu items" />
-          <MyTextField onChange={this.onDataChanged} />
-          <MyButton textButton="Add" onClick={this.onButtonClicked} />
+          <MyTextField onChange={this.handleChange} />
+          <MyButton textButton="Add" onClick={this.handleClick} />
         </div>
         <div className='item-names'>
           <ItemsList items={this.state.items} />
@@ -162,7 +151,7 @@ class MyItem extends Component {
   render () {
     return (
       <li>
-        <input type='text' onChange={this.onDataChanged} defaultValue={this.props.data} />
+        <input type='text' onChange={this.handleChange} defaultValue={this.props.data} />
       </li>
     );
   }
